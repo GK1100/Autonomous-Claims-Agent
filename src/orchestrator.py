@@ -45,6 +45,11 @@ def get_graph():
         graph = build_claim_graph()
     return graph
 
+# ✅ Serve frontend static files FIRST (but mount assets)
+# Mount static files for /assets route
+if FRONTEND_DIST.exists() and (FRONTEND_DIST / "assets").exists():
+    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
+
 # ✅ Health check routes
 @app.get("/api")
 @app.get("/api/")
@@ -172,24 +177,39 @@ def main():
 
     console.print("\n✅ Done!")
 
-# ✅ Serve frontend static files (for Render deployment)
-# These routes must be defined LAST to avoid conflicts with API routes
-if FRONTEND_DIST.exists():
-    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
+# ✅ Frontend routes - defined at module level
+@app.get("/favicon.svg")
+async def serve_favicon():
+    favicon_path = FRONTEND_DIST / "favicon.svg"
+    if favicon_path.exists():
+        return FileResponse(str(favicon_path))
+    return {"detail": "Not Found"}
+
+@app.get("/")
+async def serve_root():
+    index_path = FRONTEND_DIST / "index.html"
+    if index_path.exists():
+        return FileResponse(str(index_path))
+    return {"detail": "Frontend not built. Run: cd frontend && npm run build"}
+
+# Catch-all route for SPA - must be LAST
+@app.get("/{full_path:path}")
+async def catch_all(full_path: str):
+    # Don't interfere with API routes
+    if full_path.startswith("api"):
+        return {"detail": "Not Found"}
     
-    @app.get("/")
-    async def serve_frontend():
-        return FileResponse(str(FRONTEND_DIST / "index.html"))
+    # Try to serve the file if it exists
+    file_path = FRONTEND_DIST / full_path
+    if file_path.exists() and file_path.is_file():
+        return FileResponse(str(file_path))
     
-    @app.get("/{full_path:path}")
-    async def catch_all(full_path: str):
-        # Check if file exists in dist
-        file_path = FRONTEND_DIST / full_path
-        if file_path.exists() and file_path.is_file():
-            return FileResponse(str(file_path))
-        
-        # Otherwise serve index.html for client-side routing
-        return FileResponse(str(FRONTEND_DIST / "index.html"))
+    # Otherwise serve index.html for client-side routing
+    index_path = FRONTEND_DIST / "index.html"
+    if index_path.exists():
+        return FileResponse(str(index_path))
+    
+    return {"detail": "Not Found"}
 
 if __name__ == "__main__":
     main()
