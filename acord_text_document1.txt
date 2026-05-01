@@ -1,0 +1,53 @@
+ACORD AUTOMOBILE LOSS NOTICE (TEXT VERSION - FULL FIELDS)
+
+— INSURED DETAILS — Name: Rahul Sharma Date of Birth: 12/05/1998 Marital
+Status: Single Address: 45, MG Road, Bangalore, Karnataka, India Primary
+Phone: 9876543210 Secondary Phone: 9123456780 Primary Email:
+rahul.sharma@email.com Secondary Email: r.sharma.alt@email.com
+
+— AGENCY DETAILS — Agency Name: ABC Insurance Pvt Ltd Agent Name: Priya
+Mehta Phone: 080-45678901 Email: agent@abcinsurance.com Agency Customer
+ID: AG12345
+
+— POLICY DETAILS — Policy Number: POL123456 Carrier: ABC General
+Insurance NAIC Code: 12345 Line of Business: Auto Insurance Date of
+Report: 10/04/2026
+
+— CONTACT DETAILS — Contact Person: Rahul Sharma Preferred Contact Time:
+Evening Contact Phone: 9876543210
+
+— LOSS INFORMATION — Date of Loss: 09/04/2026 Time: 5:30 PM Location: MG
+Road, Bangalore, Karnataka, India Police Contacted: Yes Report Number:
+BLR2026-778
+
+Description of Accident: The insured vehicle was stopped at a traffic
+signal when another car hit it from behind due to sudden braking.
+Weather conditions were clear and road was dry.
+
+— INSURED VEHICLE — Vehicle No: 1 Year: 2020 Make: Hyundai Model: i20
+Body Type: Hatchback VIN: VIN123456789 Plate Number: KA01AB1234 State:
+Karnataka
+
+Owner Name: Rahul Sharma Driver Name: Rahul Sharma License Number:
+DL12345678 State: Karnataka Purpose of Use: Personal Relation to
+Insured: Self Used with Permission: Yes
+
+— DAMAGE DETAILS — Damage Description: Rear bumper dent, broken tail
+light Estimated Amount: ₹45,000 Where Vehicle Can Be Seen: ABC Garage,
+Bangalore When Can Be Seen: 11/04/2026
+
+Child Seat Installed: No Child Seat In Use: No Child Seat Damaged: No
+
+— OTHER VEHICLE / PROPERTY — Other Vehicle: Maruti Swift 2019 Damage:
+Front bumper damaged Other Insurance: Yes
+
+— INJURY DETAILS — Injured Person: Rahul Sharma Age: 27 Extent of
+Injury: Minor neck strain
+
+— WITNESSES — Witness 1: Amit Verma, Phone: 9988776655
+
+— REMARKS — Claim filed for repair reimbursement. Awaiting inspection
+and approval.
+
+— DECLARATION — All information provided is true and correct to the best
+of my knowledge.
