@@ -43,7 +43,7 @@ def get_graph():
     return graph
 
 # ✅ Health check routes
-@app.get("/")
+# @app.get("/")
 @app.get("/api")
 async def api_status():
     return {
