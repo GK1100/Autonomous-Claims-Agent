@@ -2,9 +2,7 @@ services:
   - type: web
     name: claims-processing-agent
     runtime: python
-    buildCommand: |
-      pip install -r requirements.txt
-      cd frontend && npm install && npm run build
+    buildCommand: python build.py
     startCommand: uvicorn src.orchestrator:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION

@@ -25,6 +25,16 @@ FRONTEND_DIST = PROJECT_ROOT / "frontend" / "dist"
 # ✅ Load environment variables globally (VERY IMPORTANT)
 load_dotenv(PROJECT_ROOT / ".env")
 
+# ✅ Check if frontend is built
+if not FRONTEND_DIST.exists():
+    print(f"WARNING: Frontend dist directory not found at {FRONTEND_DIST}")
+    print("Frontend will not be served. Build it with: cd frontend && npm run build")
+elif not (FRONTEND_DIST / "index.html").exists():
+    print(f"WARNING: index.html not found in {FRONTEND_DIST}")
+    print("Frontend build may be incomplete.")
+else:
+    print(f"✓ Frontend found at {FRONTEND_DIST}")
+
 # ✅ Initialize FastAPI App
 app = FastAPI(title="Claims Processing API")
 
