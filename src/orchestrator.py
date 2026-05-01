@@ -11,6 +11,8 @@ from uuid import uuid4
 # FastAPI imports
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 # Local imports
 from src.graph.workflow import build_claim_graph
@@ -18,6 +20,7 @@ from src.graph.workflow import build_claim_graph
 # ✅ Safer path handling (Vercel compatible)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_INPUT = PROJECT_ROOT / "data" / "input"
+FRONTEND_DIST = PROJECT_ROOT / "frontend" / "dist"
 
 # ✅ Load environment variables globally (VERY IMPORTANT)
 load_dotenv(PROJECT_ROOT / ".env")
@@ -43,8 +46,8 @@ def get_graph():
     return graph
 
 # ✅ Health check routes
-# @app.get("/")
 @app.get("/api")
+@app.get("/api/")
 async def api_status():
     return {
         "status": "ok",
@@ -168,6 +171,25 @@ def main():
         graph.invoke(state)
 
     console.print("\n✅ Done!")
+
+# ✅ Serve frontend static files (for Render deployment)
+# These routes must be defined LAST to avoid conflicts with API routes
+if FRONTEND_DIST.exists():
+    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
+    
+    @app.get("/")
+    async def serve_frontend():
+        return FileResponse(str(FRONTEND_DIST / "index.html"))
+    
+    @app.get("/{full_path:path}")
+    async def catch_all(full_path: str):
+        # Check if file exists in dist
+        file_path = FRONTEND_DIST / full_path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(str(file_path))
+        
+        # Otherwise serve index.html for client-side routing
+        return FileResponse(str(FRONTEND_DIST / "index.html"))
 
 if __name__ == "__main__":
     main()

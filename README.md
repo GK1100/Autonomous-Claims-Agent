@@ -33,7 +33,23 @@ OPENROUTER_API_KEY=your_openrouter_key_here
 ```
 *(By default, the system uses `openai/gpt-oss-120b:free` or `z-ai/glm-4.5-air:free`. You can easily swap this out for `openai/gpt-4o-mini` or `anthropic/claude-3-haiku` in `src/graph/nodes.py`)*
 
-### 3. Run the Agent
+### 3. Run the Application
+
+#### Option A: Web Interface (Recommended)
+Start the FastAPI server with the React frontend:
+```bash
+# Build the frontend first
+cd frontend
+npm install
+npm run build
+cd ..
+
+# Start the server
+uvicorn src.orchestrator:app --reload
+```
+Then open your browser to `http://localhost:8000`
+
+#### Option B: CLI Mode
 To process all `.txt` FNOL documents located in the `data/input/` folder automatically:
 ```bash
 python -m src.orchestrator
@@ -43,6 +59,35 @@ To process a specific file directly via the command line:
 ```bash
 python -m src.orchestrator path/to/your/document.txt
 ```
+
+---
+
+## 🚀 Deployment
+
+### Deploy to Render
+
+This project is configured for easy deployment to Render:
+
+1. **Push your code to GitHub**
+2. **Connect to Render:**
+   - Go to [Render Dashboard](https://dashboard.render.com/)
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+3. **Configure the service:**
+   - Render will auto-detect the `render.yaml` configuration
+   - Add your `OPENROUTER_API_KEY` in the Environment Variables section
+4. **Deploy:**
+   - Click "Create Web Service"
+   - Render will automatically build and deploy your app
+
+The app will be available at: `https://your-app-name.onrender.com`
+
+### Manual Deployment Configuration
+
+If you prefer manual configuration:
+- **Build Command:** `pip install -r requirements.txt && cd frontend && npm install && npm run build`
+- **Start Command:** `uvicorn src.orchestrator:app --host 0.0.0.0 --port $PORT`
+- **Environment Variables:** Add `OPENROUTER_API_KEY`
 
 ---
 
