@@ -3,7 +3,7 @@
   "outputDirectory": "frontend/dist",
   "functions": {
     "src/orchestrator.py": {
-      "runtime": "python3.9"
+      "runtime": "@vercel/python"
     }
   },
   "routes": [
