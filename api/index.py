@@ -22,6 +22,11 @@ app.add_middleware(
 
 graph = build_claim_graph()
 
+@app.get("/api")
+@app.get("/api/process")
+async def api_status():
+    return {"status": "ok", "message": "API is running. Send a POST request to /api/process with a 'file' payload to process a claim."}
+
 @app.post("/api/process")
 async def process_claim(file: UploadFile = File(...)):
     if not file.filename.endswith('.txt'):
