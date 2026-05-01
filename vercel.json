@@ -2,9 +2,7 @@
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
   "functions": {
-    "src/orchestrator.py": {
-      "runtime": "@vercel/python"
-    }
+    "src/orchestrator.py": {}
   },
   "routes": [
     {
