@@ -3,7 +3,7 @@
   "outputDirectory": "frontend/dist",
 
   "functions": {
-    "api/index.py": {
+    "api/app.py": {
       "maxDuration": 10
     }
   },
@@ -11,7 +11,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "api/index.py"
+      "dest": "api/app.py"
     },
     {
       "src": "^/$",
